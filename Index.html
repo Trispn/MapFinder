@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character Encoding -->
+  <meta charset="UTF-8">
+
+  <!-- Viewport for Responsive Design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+
+  <!-- Description for SEO -->
+  <meta name="description" content="MapFinder helps you discover nearby places with advanced filters, reviews, and contact details.">
+
+  <!-- Keywords for SEO -->
+  <meta name="keywords" content="map finder, google maps, place search, nearby places, location finder">
+
+  <!-- Author Information -->
+  <meta name="author" content="Your Name">
+
+  <!-- Title for the Page -->
+  <title>MapFinder - Find Nearby Places</title>
+
+  <!-- Favicon for Browsers -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+
+  <!-- iOS-Specific Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes"> <!-- Enables Fullscreen Mode on iOS -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> <!-- Customizes Status Bar Style -->
+  <meta name="apple-mobile-web-app-title" content="MapFinder"> <!-- App Title on Home Screen -->
+
+  <!-- Theme Color for Browsers -->
+  <meta name="theme-color" content="#0074d9"> <!-- Sets Browser UI Color -->
+
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:title" content="MapFinder - Find Nearby Places">
+  <meta property="og:description" content="Discover nearby places with advanced filters, reviews, and contact details.">
+  <meta property="og:image" content="https://github.com/Trispn/MapFinder.git/k.jpg"> <!-- Replace with your image URL -->
+  <meta property="og:url" content="https://github.com/Trispn/MapFinder.git"> <!-- Replace with your website URL -->
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MapFinder - Find Nearby Places">
+  <meta name="twitter:description" content="Discover nearby places with advanced filters, reviews, and contact details.">
+  <meta name="twitter:image" content="https://github.com/Trispn/MapFinder.git/twitter-image.jpg"> <!-- Replace with your image URL -->
+
+  <!-- Stylesheet Link -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google Maps API Script -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&libraries=places"></script>
+</head>
+  <style>
+   /* styles.css */
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #0074d9;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+#search-bar {
+  padding: 0.5rem;
+  width: 300px;
+  margin-right: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+#search-bar:focus {
+  border-color: #0074d9;
+  outline: none;
+}
+
+#search-button {
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  color: #0074d9;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#search-button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  margin-left: 1rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #ffffffdd;
+}
+
+/* Main Content Styling */
+.main-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  flex-grow: 1;
+}
+
+.filters,
+.results,
+.map {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filters {
+  order: 1;
+}
+
+.results {
+  order: 2;
+}
+
+.map {
+  order: 3;
+  height: 400px;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Filters Section */
+.filters h3 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.filters label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.filters input[type="range"] {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.filters select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+}
+
+.filters select:focus {
+  border-color: #0074d9;
+  outline: none;
+}
+
+.filters input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+#distance-value {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Results Section */
+.result-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.result-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 1rem;
+  border-radius: 4px;
+}
+
+.result-card .details {
+  flex-grow: 1;
+}
+
+.result-card .details h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.result-card .details p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.result-card button {
+  padding: 0.25rem 0.5rem;
+  background-color: #0074d9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+}
+
+.result-card button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer Styling */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #0074d9;
+  color: white;
+  margin-top: auto;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #ffffffdd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #search-bar {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  #search-bar {
+    font-size: 0.9rem;
+  }
+
+  .filters select,
+  .filters input[type="range"] {
+    font-size: 0.875rem;
+  }
+
+  .result-card img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .result-card .details h4 {
+    font-size: 0.9rem;
+  }
+
+  .result-card .details p {
+    font-size: 0.8rem;
+  }
+}
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&libraries=places"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">MapFinder</div>
+    <input id="search-bar" type="text" placeholder="Search for a place..." />
+    <button id="search-button">Search</button>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="hwitw.html">How It Works</a></li>
+        <li><a href="#contact-us">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Filters Section -->
+    <section class="filters">
+      <h3>Filters</h3>
+      <label for="price-range">Price Range:</label>
+      <select id="price-range">
+        <option value="all">All Prices</option>
+        <option value="$">Low ($)</option>
+        <option value="$$">Moderate ($$)</option>
+        <option value="$$$">High ($$$)</option>
+        <option value="$$$$">Luxury ($$$$)</option>
+      </select>
+
+      <label for="rating-dropdown">Rating:</label>
+      <select id="rating-dropdown">
+        <option value="0">Any Rating</option>
+        <option value="3">3+ stars</option>
+        <option value="4">4+ stars</option>
+        <option value="5">5 stars</option>
+      </select>
+
+      <label for="distance-slider">Distance (km):</label>
+      <input id="distance-slider" type="range" min="1" max="50" value="10" step="1" />
+      <span id="distance-value">10 km</span>
+
+      <label for="open-now">Open Now:</label>
+      <input id="open-now" type="checkbox" />
+
+      <label for="wheelchair-accessible">Wheelchair Accessible:</label>
+      <input id="wheelchair-accessible" type="checkbox" />
+
+      <!-- Feature 1: Cuisines Filter -->
+      <label for="cuisine-dropdown">Cuisine Type:</label>
+      <select id="cuisine-dropdown">
+        <option value="all">All Cuisines</option>
+        <option value="italian">Italian</option>
+        <option value="mexican">Mexican</option>
+        <option value="asian">Asian</option>
+        <option value="american">American</option>
+      </select>
+
+      <!-- Feature 2: Sort By Options -->
+      <label for="sort-by">Sort By:</label>
+      <select id="sort-by">
+        <option value="relevance">Relevance</option>
+        <option value="distance">Distance</option>
+        <option value="rating">Rating</option>
+        <option value="price">Price</option>
+      </select>
+
+      <!-- Feature 3: Save to Favorites -->
+      <label for="save-to-favorites">Save to Favorites:</label>
+      <input id="save-to-favorites" type="checkbox" />
+
+      <!-- Feature 4: View on Street View -->
+      <label for="street-view">View on Street View:</label>
+      <input id="street-view" type="checkbox" />
+
+      <!-- Feature 5: Language Selection -->
+      <label for="language-selection">Language:</label>
+      <select id="language-selection">
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+      </select>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results">
+      <h3>Results</h3>
+      <div id="result-cards"></div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map">
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2023 MapFinder. All rights reserved.</p>
+    <p><a href="#privacy-policy">Privacy Policy</a> | <a href="#terms-of-service">Terms of Service</a></p>
+  </footer>
+
+  <script>
+    // script.js
+
+let map;
+let markers = [];
+let service;
+
+function initMap() {
+  // Default center (San Francisco)
+  const defaultCenter = { lat: 37.7749, lng: -122.4194 };
+
+  // Initialize the map
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: defaultCenter,
+    zoom: 12,
+  });
+
+  // Add autocomplete to the search bar
+  const searchInput = document.getElementById("search-bar");
+  const autocomplete = new google.maps.places.Autocomplete(searchInput);
+
+  // Set bounds for autocomplete predictions
+  const defaultBounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(37.768, -122.445),
+    new google.maps.LatLng(37.778, -122.425)
+  );
+  autocomplete.setBounds(defaultBounds);
+
+  // Listen for place selection
+  autocomplete.addListener("place_changed", () => {
+    const place = autocomplete.getPlace();
+    if (!place.geometry) return;
+
+    // Center the map on the selected location
+    map.setCenter(place.geometry.location);
+    map.setZoom(15);
+
+    // Clear previous markers
+    markers.forEach((marker) => marker.setMap(null));
+    markers = [];
+
+    // Add a marker for the selected location
+    const marker = new google.maps.Marker({
+      map,
+      position: place.geometry.location,
+    });
+    markers.push(marker);
+
+    // Fetch nearby places based on filters
+    fetchNearbyPlaces(place.geometry.location);
+  });
+}
+
+// Fetch nearby places using the Places Library
+function fetchNearbyPlaces(location) {
+  const distance = document.getElementById("distance-slider").value * 1000; // Convert km to meters
+  const rating = parseInt(document.getElementById("rating-dropdown").value);
+  const priceRange = document.getElementById("price-range").value;
+  const cuisineType = document.getElementById("cuisine-dropdown").value;
+  const openNow = document.getElementById("open-now").checked;
+  const wheelchairAccessible = document.getElementById("wheelchair-accessible").checked;
+  const sortBy = document.getElementById("sort-by").value;
+  const streetViewEnabled = document.getElementById("street-view").checked;
+  const language = document.getElementById("language-selection").value;
+
+  // Create a request object for nearby places
+  const request = {
+    location,
+    radius: distance,
+    type: "restaurant", // Default type, can be extended dynamically
+    minPriceLevel: priceRange !== "all" ? getPriceLevel(priceRange) : undefined,
+    maxPriceLevel: priceRange !== "all" ? getPriceLevel(priceRange) : undefined,
+    openNow: openNow,
+    rankBy: sortBy === "distance" ? google.maps.places.RankBy.DISTANCE : undefined,
+  };
+
+  if (cuisineType !== "all") {
+    request.keyword = cuisineType;
+  }
+
+  // Initialize the Places Service
+  service = new google.maps.places.PlacesService(map);
+
+  // Send the request
+  service.nearbySearch(request, (results, status) => {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      // Filter results by rating if needed
+      const filteredResults =
+        rating > 0 ? results.filter((place) => place.rating >= rating) : results;
+
+      // Update the UI with filtered results
+      updateResults(filteredResults);
+
+      // Enable Street View if requested
+      if (streetViewEnabled && filteredResults.length > 0) {
+        enableStreetView(filteredResults[0].geometry.location);
+      }
+    } else {
+      console.error("Error fetching nearby places:", status);
+    }
+  });
+}
+
+// Helper function to convert price range to numeric value
+function getPriceLevel(priceRange) {
+  switch (priceRange) {
+    case "$":
+      return 1;
+    case "$$":
+      return 2;
+    case "$$$":
+      return 3;
+    case "$$$$":
+      return 4;
+    default:
+      return undefined;
+  }
+}
+
+// Update the results section and map with fetched places
+function updateResults(places) {
+  const resultCardsContainer = document.getElementById("result-cards");
+  resultCardsContainer.innerHTML = ""; // Clear previous results
+
+  // Remove old markers
+  markers.forEach((marker) => marker.setMap(null));
+  markers = [];
+
+  // Add new markers and result cards
+  places.forEach((place) => {
+    const card = document.createElement("div");
+    card.className = "result-card";
+
+    const image = document.createElement("img");
+    image.src =
+      place.photos && place.photos.length > 0
+        ? place.photos[0].getUrl({ maxWidth: 60, maxHeight: 60 })
+        : "placeholder.jpg";
+    card.appendChild(image);
+
+    const details = document.createElement("div");
+    details.className = "details";
+
+    const name = document.createElement("h4");
+    name.textContent = place.name || "No Name";
+    details.appendChild(name);
+
+    const address = document.createElement("p");
+    address.textContent = place.vicinity || "No Address";
+    details.appendChild(address);
+
+    const ratingElement = document.createElement("p");
+    ratingElement.textContent = `Rating: ${place.rating || "N/A"}`;
+    details.appendChild(ratingElement);
+
+    const phoneButton = document.createElement("button");
+    phoneButton.textContent = "Call";
+    phoneButton.onclick = () => window.open(`tel:${place.formatted_phone_number}`);
+    details.appendChild(phoneButton);
+
+    const directionsButton = document.createElement("button");
+    directionsButton.textContent = "Get Directions";
+    directionsButton.onclick = () =>
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${place.geometry.location.lat()},${place.geometry.location.lng()}`);
+    details.appendChild(directionsButton);
+
+    card.appendChild(details);
+    resultCardsContainer.appendChild(card);
+
+    // Add marker to map
+    const marker = new google.maps.Marker({
+      position: place.geometry.location,
+      map: map,
+      title: place.name,
+    });
+    markers.push(marker);
+  });
+
+  if (places.length > 0) {
+    const bounds = new google.maps.LatLngBounds();
+    places.forEach((place) => bounds.extend(place.geometry.location));
+    map.fitBounds(bounds);
+  }
+}
+
+// Enable Street View
+function enableStreetView(location) {
+  const panorama = new google.maps.StreetViewPanorama(
+    document.getElementById("map"),
+    {
+      position: location,
+      pov: {
+        heading: 34,
+        pitch: 10,
+      },
+    }
+  );
+  map.setStreetView(panorama);
+}
+
+// Handle Distance Slider Value Change
+document.getElementById("distance-slider").addEventListener("input", (e) => {
+  document.getElementById("distance-value").textContent = `${e.target.value} km`;
+});
+
+// Handle Search Button Click
+document.getElementById("search-button").addEventListener("click", () => {
+  const searchInput = document.getElementById("search-bar").value;
+  if (!searchInput) return;
+
+  const geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ address: searchInput }, (results, status) => {
+    if (status === "OK") {
+      const location = results[0].geometry.location;
+      map.setCenter(location);
+      map.setZoom(15);
+
+      // Clear previous markers
+      markers.forEach((marker) => marker.setMap(null));
+      markers = [];
+
+      // Add a marker for the selected location
+      const marker = new google.maps.Marker({
+        map,
+        position: location,
+      });
+      markers.push(marker);
+
+      // Fetch nearby places based on filters
+      fetchNearbyPlaces(location);
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
+  });
+});
+
+// Initialize Map on Page Load
+window.onload = initMap;
+  </script>
+</body>
+</html>

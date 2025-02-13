@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MapFinder - How It Works</title>
+  <style>
+    /* Styles will be added later */
+    /* styles.css */
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #0074d9;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+#search-bar {
+  padding: 0.5rem;
+  width: 300px;
+  margin-right: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+#search-bar:focus {
+  border-color: #0074d9;
+  outline: none;
+}
+
+#search-button {
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  color: #0074d9;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#search-button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  margin-left: 1rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #ffffffdd;
+}
+
+/* Main Content Styling */
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  text-align: center;
+}
+
+.how-it-works h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #0074d9;
+}
+
+.how-it-works p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon img {
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+}
+
+.content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.content p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Footer Styling */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #0074d9;
+  color: white;
+  margin-top: auto;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #ffffffdd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #search-bar {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .step {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .icon img {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .how-it-works h1 {
+    font-size: 1.75rem;
+  }
+
+  .content h3 {
+    font-size: 1.1rem;
+  }
+
+  .content p {
+    font-size: 0.9rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">MapFinder</div>
+    <input id="search-bar" type="text" placeholder="Search for a place..." />
+    <button id="search-button">Search</button>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#contact-us">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="how-it-works">
+      <h1>How MapFinder Works</h1>
+      <p>Discover nearby places effortlessly with MapFinder. Here's how it works:</p>
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="icon">
+          <img src="search-icon.png" alt="Search Icon" />
+        </div>
+        <div class="content">
+          <h3>Step 1: Search for a Place</h3>
+          <p>Type in the name of a location or use your current location to start exploring nearby places.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="icon">
+          <img src="filter-icon.png" alt="Filter Icon" />
+        </div>
+        <div class="content">
+          <h3>Step 2: Apply Filters</h3>
+          <p>Refine your search using advanced filters like price range, rating, distance, cuisine type, and more.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="icon">
+          <img src="map-icon.png" alt="Map Icon" />
+        </div>
+        <div class="content">
+          <h3>Step 3: Explore Results</h3>
+          <p>View detailed information about each place, including ratings, reviews, photos, and contact details.</p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step">
+        <div class="icon">
+          <img src="directions-icon.png" alt="Directions Icon" />
+        </div>
+        <div class="content">
+          <h3>Step 4: Get Directions</h3>
+          <p>Click on "Get Directions" to navigate to your chosen destination using Google Maps.</p>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step">
+        <div class="icon">
+          <img src="street-view-icon.png" alt="Street View Icon" />
+        </div>
+        <div class="content">
+          <h3>Step 5: View Street View</h3>
+          <p>Enable Street View to explore the area around your selected location in immersive detail.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2023 MapFinder. All rights reserved.</p>
+    <p><a href="#privacy-policy">Privacy Policy</a> | <a href="#terms-of-service">Terms of Service</a></p>
+  </footer>
+</body>
+</html>
